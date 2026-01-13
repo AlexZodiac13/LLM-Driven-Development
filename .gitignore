@@ -4,3 +4,5 @@
 *.parquet
 *.xlsx
 *.ipynb_checkpoints
+mlruns/
+mlflow.db

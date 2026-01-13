@@ -1,0 +1,5 @@
+Sending request to vLLM model 'Qwen/Qwen2.5-1.5B-Instruct' via OpenAI SDK...
+Response received:
+ChatCompletion(id='chatcmpl-a7c49bb9eec5ac9f', choices=[Choice(finish_reason='stop', index=0, logprobs=None, message=ChatCompletionMessage(content='The capital of France is Paris.', refusal=None, role='assistant', annotations=None, audio=None, function_call=None, tool_calls=[], reasoning=None, reasoning_content=None), stop_reason=None, token_ids=None)], created=1768318689, model='Qwen/Qwen2.5-1.5B-Instruct', object='chat.completion', service_tier=None, system_fingerprint=None, usage=CompletionUsage(completion_tokens=8, prompt_tokens=36, total_tokens=44, completion_tokens_details=None, prompt_tokens_details=None), prompt_logprobs=None, prompt_token_ids=None, kv_transfer_params=None)
+
+Answer: The capital of France is Paris.
