@@ -1,0 +1,14 @@
+transformers
+datasets
+evaluate
+rouge_score
+bert_score
+torch
+pandas
+matplotlib
+seaborn
+ipykernel
+scipy
+sacrebleu
+sentencepiece
+protobuf
