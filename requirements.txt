@@ -1,5 +1,0 @@
-vllm
-mlflow
-openai
-httpx
-pandas
