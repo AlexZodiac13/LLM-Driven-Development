@@ -1,46 +1,31 @@
-# Оценка качества генерации текста (Task 4)
+# Task 5: LLM Chatbot & Langfuse Monitoring
 
-Проект выполнен в рамках домашнего задания по курсу LLM-Driven Development.
-Выбран Трек B: Text Summarization (Суммаризация текстов).
+Решение задания по разработке LLM-приложения с интеграцией мониторинга и автоматической оценки качества.
 
-## Структура проекта
-- `solution.ipynb`: Основной Jupyter Notebook с кодом экспериментов.
-- `requirements.txt`: Список зависимостей.
-- `.venv`: Виртуальное окружение (должно быть создано).
+## Функционал
+* **Чат-бот**: Реализован на базе **Google Gemini** (`gemini-flash-latest`).
+* **Мониторинг**: Трейсинг всех диалогов и метрик (токены, латентность) в **Langfuse**.
+* **Evaluation**: Автоматическая оценка качества ответов (LLM-as-a-judge) с использованием датасетов Langfuse.
+* **Resilience**: Реализован механизм `Retry` (повторные попытки) для обработки ошибок квоты API (429 Resource Exhausted).
 
-## Установка и запуск
+## 🛠 Установка и запуск
 
-1. Перейдите в папку проекта:
+1. **Установите зависимости:**
    ```bash
-   cd task4_project
+   pip install google-generativeai langfuse python-dotenv ipykernel
    ```
 
-2. (Если не создано) Создайте виртуальное окружение:
-   ```bash
-   python3 -m venv .venv
-   source .venv/bin/activate
+2. **Настройте переменные окружения:**
+   Создайте файл `.env` в корне проекта:
+   ```ini
+   GOOGLE_API_KEY=ваш_ключ_gemini
+   LANGFUSE_SECRET_KEY=sk-lf-...
+   LANGFUSE_PUBLIC_KEY=pk-lf-...
+   LANGFUSE_HOST=https://cloud.langfuse.com
    ```
 
-3. Установите зависимости:
-   ```bash
-   pip install -r requirements.txt
-   ```
+3. **Запустите решение:**
+   Откройте файл [task5_solution.ipynb](task5_solution.ipynb) в VS Code или Jupyter Lab и выполните ячейки по порядку.
 
-4. Запустите Jupyter Notebook:
-   ```bash
-   jupyter notebook solution.ipynb
-   ```
-   Или откройте файл в VS Code и выберите ядро `.venv`.
 
-## Выбор моделей и данных
-- **Датасет**: `IlyaGusev/gazeta` (Тестовая выборка).
-- **Модели**:
-  1. `IlyaGusev/rut5_base_sum_gazeta` (Специализированная T5).
-  2. `cointegrated/rut5-base-multitask` (Универсальная T5).
-
-## Метрики
-Реализован подсчет:
-- ROUGE-1, ROUGE-L
-- BLEU
-- BERTScore (Semantic Similarity)
-- Время генерации и длина ответа.
+![alt text](1.png) ![alt text](2.png) ![alt text](3.png) ![alt text](4.png)
