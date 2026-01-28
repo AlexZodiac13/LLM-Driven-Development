@@ -1,4 +1,0 @@
-openai
-langfuse
-python-dotenv
-ipykernel
