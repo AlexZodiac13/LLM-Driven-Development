@@ -1,1 +1,30 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Jupyter Notebooks
+.ipynb_checkpoints/
+
+# Virtual Environment
 .venv/
+venv/
+env/
+
+# Model Weights and Training Results
+results/
+outputs/
+llama-2-7b-finetome-lora/
+*.safetensors
+*.bin
+*.pt
+*.pth
+
+# Hugging Face Cache (if present locally in project)
+.cache/
+
+# VS Code
+.vscode/
+
+# Debug files
+debug_trl.py
