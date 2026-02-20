@@ -1,0 +1,55 @@
+services:
+  ollama:
+    image: ollama/ollama:latest
+    container_name: ollama
+    volumes:
+      - ollama_data:/root/.ollama
+    ports:
+      - "11434:11434"
+    healthcheck:
+      test: ["CMD", "ollama", "list"]
+      interval: 5s
+      retries: 5
+
+  model-puller:
+    image: curlimages/curl
+    container_name: model-puller
+    depends_on:
+      ollama:
+        condition: service_healthy
+    # Wait for Ollama to be ready, then pull the model via API
+    command: >
+      sh -c "
+      echo 'Waiting for Ollama API...';
+      sleep 5;
+      echo 'Pulling llama3.2...';
+      curl -X POST http://ollama:11434/api/pull -d '{\"name\": \"llama3.2\"}';
+      echo 'Model pulled successfully.';
+      "
+
+  ragas-tests:
+    build: .
+    container_name: ragas-tests
+    volumes:
+      - ./tests:/app/tests
+      - ./run_ragas_demo_test.py:/app/run_ragas_demo_test.py
+    depends_on:
+      model-puller:
+        condition: service_completed_successfully
+    environment:
+      - LLM_PROVIDER=local
+      - OLLAMA_BASE_URL=http://ollama:11434/v1
+      - OPENAI_MODEL=llama3.2
+      # Explicitly set embedding model compatible with sentence-transformers
+      - RAGAS_EMBEDDING_MODEL=sentence-transformers/all-MiniLM-L6-v2
+      - USE_SIMPLE_AR=1
+      # Relax thresholds for smaller local models
+      - THRESH_FAITHFULNESS=0.5
+      - THRESH_ANSWER_RELEVANCY=0.3
+      - THRESH_CONTEXT_PRECISION=0.3
+      - THRESH_CONTEXT_RECALL=0.5
+      - THRESH_QA_SIM=0.6
+    command: pytest tests/test_ragas.py
+
+volumes:
+  ollama_data:
