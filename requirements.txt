@@ -1,0 +1,21 @@
+# Core ML
+torch
+torchvision
+transformers
+sentence-transformers
+
+# Vector DB
+qdrant-client
+
+# Data handling
+datasets
+pandas
+Pillow
+requests
+
+# Notebook
+jupyter
+ipykernel
+tqdm
+matplotlib
+scikit-learn
